@@ -114,7 +114,7 @@ public class BattleShip {
         return field;
     }
 
-    public int[][] shot(final int x, final int y) {
+    public int[][][] shot(final int x, final int y) {
         if (x >= 10 || x < 0 || y < 0 || y >= 10) {
             System.out.println("Невозможный выстрел! x:" + x + " y:" + y);
         }
@@ -133,31 +133,31 @@ public class BattleShip {
             if (x + 1 <= 9) {
                 if (myShips[x + 1][y] == 2) {
                     System.out.println("ранил:)");
-                    return myShipsForEnemy;
+                    return new int[][][]{enemyShips, myShipsForEnemy};
                 }
             }
             if (y + 1 <= 9) {
                 if (myShips[x][y + 1] == 2) {
                     System.out.println("ранил:)");
-                    return myShipsForEnemy;
+                    return new int[][][]{enemyShips, myShipsForEnemy};
                 }
             }
             if (x - 1 >= 0) {
                 if (myShips[x - 1][y] == 2) {
                     System.out.println("ранил:)");
-                    return myShipsForEnemy;
+                    return new int[][][]{enemyShips, myShipsForEnemy};
                 }
             }
             if (y - 1 >= 0) {
                 if (myShips[x][y - 1] == 2) {
                     System.out.println("ранил:)");
-                    return myShipsForEnemy;
+                    return new int[][][]{enemyShips, myShipsForEnemy};
                 }
             }
             //рядом с кораблем нет 2, корабль потапили:)
             System.out.println("убил:)");
             //пока упращенный вариант, не будем обрисовывать вокруг корабля точки.
-            return myShipsForEnemy;
+            return new int[][][]{enemyShips, myShipsForEnemy};
         }
         //иначе соперник промахнулся.
         System.out.println("Вы промахнулись!");
@@ -181,14 +181,14 @@ public class BattleShip {
             if (enemyShips[coordinats[0]][coordinats[1]] != 2) {
                 System.out.println("я не попал, пичально:(");
                 enemyShips[coordinats[0]][coordinats[1]] = 1;
-                return myShipsForEnemy;
+                return new int[][][]{enemyShips, myShipsForEnemy};
             } else {
                 System.out.println("опа, попал:)");
                 enemyShips[coordinats[0]][coordinats[1]] = 3;
                 //сразу проверим, победил ли комп.
                 if (isWin(enemyShips)) {
                     System.out.println("опа, я выиграл");
-                    return null;
+                    return new int[][][]{enemyShips, myShips};
                 }
                 System.out.println("стреляю ещё раз:)");
             }
