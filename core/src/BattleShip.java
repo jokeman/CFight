@@ -242,13 +242,13 @@ public class BattleShip {
                 if (y + 1 <= 9) {
                     field[x + i][y + 1] = 4;
                 }
-                if (x <= 5 && y + 1 <= 9) {
+                if (x <= field.length-shipLength-1 && y + 1 <= 9) {
                     field[x + shipLength][y + 1] = 4;
                 }
-                if (x <= 5) {
+                if (x <= field.length-shipLength-1) {
                     field[x + shipLength][y] = 4;
                 }
-                if (x <= 5 && y - 1 >= 0) {
+                if (x <= field.length-shipLength-1 && y - 1 >= 0) {
                     field[x + shipLength][y - 1] = 4;
                 }
                 field[x + i][y] = 2;
@@ -268,13 +268,13 @@ public class BattleShip {
                 if (x - 1 >= 0) {
                     field[x - 1][y + i] = 4;
                 }
-                if (x - 1 >= 0 && y <= 5) {
+                if (x - 1 >= 0 && y <= field.length-shipLength-1) {
                     field[x - 1][y + shipLength] = 4;
                 }
-                if (y <= 5) {
+                if (y <= field.length-shipLength-1) {
                     field[x][y + shipLength] = 4;
                 }
-                if (x + 1 <= 9 && y <= 5) {
+                if (x + 1 <= 9 && y <= field.length-shipLength-1) {
                     field[x + 1][y + shipLength] = 4;
                 }
                 field[x][y + i] = 2;
