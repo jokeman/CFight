@@ -26,6 +26,12 @@ public class BattleShip {
         myShipsForEnemy = new int[10][10];
     }
 
+    public BattleShip(int[][] myShipsN, int[][] enemyShipsN) {
+        myShips = myShipsN;
+        enemyShips = enemyShipsN;
+        myShipsForEnemy = new int[10][10];
+    }
+
     private int[][] randomField() {
         int[][] field = new int[10][10];
         final Random random = new Random();
