@@ -16,7 +16,7 @@ public class BattleStarter {
     public static void main(String[] args) {
         final Properties configs = new Properties();
         configs.put(ConfigKeys.PORT, "8018");
-        configs.put(ConfigKeys.WORK_DIR, "C:\\Users\\Dead_off\\IdeaProjects\\CFight\\core\\src");
+        configs.put(ConfigKeys.WORK_DIR, "D:\\11\\CFight\\core\\src");
         configs.put(ConfigKeys.MAX_THREADS, "10");
         final BoletsContainer boletsContainer = new BoletsContainer();
         boletsContainer.add("BattleBolet", new BattleBolet());

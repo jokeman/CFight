@@ -2,6 +2,8 @@ import ru.ifmo.enf.micelius.core.Bolet;
 import ru.ifmo.enf.micelius.core.InnerRequest;
 import ru.ifmo.enf.micelius.core.InnerResponse;
 
+import java.util.HashMap;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Dead_off
@@ -10,29 +12,26 @@ import ru.ifmo.enf.micelius.core.InnerResponse;
  * To change this template use File | Settings | File Templates.
  */
 public class BattleBolet implements Bolet {
+    HashMap<Integer, BattleShip> map = new HashMap<Integer, BattleShip>();
     @Override
     public void process(InnerRequest innerRequest, InnerResponse innerResponse) {
-        final int x = Integer.parseInt(innerRequest.getParameter("X"));
-        final int y = Integer.parseInt(innerRequest.getParameter("Y"));
-        final String myS = innerRequest.getParameter("myS");
-        final String enemyS = innerRequest.getParameter("enemyS");
-        String[] temp = myS.split("!");
-        String[][] myShipsSt = new String[10][10];
-        String[][] enemyShipsSt = new String[10][10];
-        String[] tempE = enemyS.split("!");
-        for (int i = 0; i < 10; i++) {
-            myShipsSt[i] = temp[i].split(";");
-            enemyShipsSt[i] = tempE[i].split(";");
+        final int x = Integer.parseInt(innerRequest.getParameter("x"));
+        final int y = Integer.parseInt(innerRequest.getParameter("y"));
+        final int id = Integer.parseInt(innerRequest.getParameter("id"));
+        final String firstLaunch = innerRequest.getParameter("firstLaunch");
+        if(firstLaunch.equals("true")){
+            map.put(id,  new BattleShip());
         }
-        int[][] myShips = new int[10][10];
-        int[][] enemyShips = new int[10][10];
-        for (int i = 0; i < myShips.length; i++) {
-            for (int j = 0; j < myShips.length; j++) {
-                myShips[i][j] = Integer.parseInt(myShipsSt[i][j]);
-                enemyShips[i][j] = Integer.parseInt(enemyShipsSt[i][j]);
-            }
-        }
-        BattleShip A = new BattleShip(myShips, enemyShips);
-        innerResponse.addObject("result", A.shot(x, y));
+        System.out.println(firstLaunch);
+        map.get(id).shot(x,y);
+        // innerResponse.addObject("computerShips", A.myShips());
+        innerResponse.add("computerShipsForPlayer", map.get(id).myShipsForEnemy());
+        innerResponse.add("playerShips", map.get(id).enemyShips());
+        innerResponse.add("isComputerWin", map.get(id).isWin(map.get(id).enemyShips())+"");
+        innerResponse.add("isHumanWin", map.get(id).isWin(map.get(id).myShips())+"");
+
+
+        //  int[][][] fields = innerRequest.getParameter("fields");
+        //innerResponse.addObject("result", );
     }
 }

@@ -1,4 +1,3 @@
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -26,10 +25,16 @@ public class BattleShip {
         myShipsForEnemy = new int[10][10];
     }
 
-    public BattleShip(int[][] myShipsN, int[][] enemyShipsN) {
-        myShips = myShipsN;
-        enemyShips = enemyShipsN;
-        myShipsForEnemy = new int[10][10];
+    public int[][] myShips() {
+        return myShips;
+    }
+
+    public int[][] enemyShips() {
+        return enemyShips;
+    }
+
+    public int[][] myShipsForEnemy() {
+        return myShipsForEnemy;
     }
 
     private int[][] randomField() {
@@ -218,7 +223,7 @@ public class BattleShip {
         System.out.println("   0  1  2  3  4  5  6  7  8  9");
     }
 
-    private boolean isWin(final int[][] field) {
+    public boolean isWin(final int[][] field) {
         for (int[] aField : field) {
             for (int j = 0; j < field.length; j++) {
                 if (aField[j] == 2) {
@@ -248,13 +253,13 @@ public class BattleShip {
                 if (y + 1 <= 9) {
                     field[x + i][y + 1] = 4;
                 }
-                if (x <= field.length-shipLength-1 && y + 1 <= 9) {
+                if (x <= 5 && y + 1 <= 9) {
                     field[x + shipLength][y + 1] = 4;
                 }
-                if (x <= field.length-shipLength-1) {
+                if (x <= 5) {
                     field[x + shipLength][y] = 4;
                 }
-                if (x <= field.length-shipLength-1 && y - 1 >= 0) {
+                if (x <= 5 && y - 1 >= 0) {
                     field[x + shipLength][y - 1] = 4;
                 }
                 field[x + i][y] = 2;
@@ -274,13 +279,13 @@ public class BattleShip {
                 if (x - 1 >= 0) {
                     field[x - 1][y + i] = 4;
                 }
-                if (x - 1 >= 0 && y <= field.length-shipLength-1) {
+                if (x - 1 >= 0 && y <= 5) {
                     field[x - 1][y + shipLength] = 4;
                 }
-                if (y <= field.length-shipLength-1) {
+                if (y <= 5) {
                     field[x][y + shipLength] = 4;
                 }
-                if (x + 1 <= 9 && y <= field.length-shipLength-1) {
+                if (x + 1 <= 9 && y <= 5) {
                     field[x + 1][y + shipLength] = 4;
                 }
                 field[x][y + i] = 2;
